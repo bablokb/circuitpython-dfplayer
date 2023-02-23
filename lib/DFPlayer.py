@@ -216,7 +216,7 @@ class DFPlayer(object):
 
   def num_files(self,folder=None,media=None):
     if folder is not None:
-      self._write_data(0x4E,folderIndex)
+      self._write_data(0x4E,folder)
       r = self._read_response()
       return r[1] if r and r[0] == 0x4E else 0
 
