@@ -202,7 +202,7 @@ class DFPlayer(object):
 
   # --- loop over all files   --------------------------------------------------
 
-  def loop(self,on=True):
+  def loop_all(self,on=True):
     self._write_data(0x11,1 if on else 0)
 
   # --- read busy state   ------------------------------------------------------
