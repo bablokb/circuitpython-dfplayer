@@ -42,8 +42,10 @@ class DFPlayer(object):
   def __init__(self,uart=None,media=None,volume=50,eq=None,latency=0.100):
     if uart is None:
       self._uart = busio.UART(board.TX,board.RX,baudrate=9600)
+      self._uart_int = True
     else:
       self._uart = uart
+      self._uart_int = False
     self._latency = latency
     self.set_media(media if media else DFPlayer.MEDIA_SD)
     if not self.get_status():
@@ -98,6 +100,12 @@ class DFPlayer(object):
       if not r:
         return res
       res = r
+
+  # --- deinit uart (if allocated internally)   --------------------------------
+
+  def deinit(self):
+    if self._uart_int:
+      self._uart.deinit()
 
   # --- play   -----------------------------------------------------------------
 
